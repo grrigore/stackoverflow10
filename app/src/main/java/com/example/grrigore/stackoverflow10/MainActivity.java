@@ -25,14 +25,16 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO internet connection check
     //TODO 2 level caching (RAM & disk)
-    //TODO proces dying restore? smth like this
-    //TODO comentarii
+    //TODO process dying restore? smth like this
+    //TODO comments
     //TODO everything in res/
     //TODO no hardcode
     //TODO UI polish
     //TODO comments
     //TODO files structure - packages
-    
+    //TODO run findBugs
+    //TODO run Lint
+
     private static final String STATE_ITEMS = "items";
 
     private static final String TAG = MainActivity.class.getSimpleName();
