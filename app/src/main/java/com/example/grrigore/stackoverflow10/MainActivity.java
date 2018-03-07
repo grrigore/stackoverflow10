@@ -1,9 +1,11 @@
 package com.example.grrigore.stackoverflow10;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String URL = "https://api.stackexchange.com/2.2/users?pagesize=10&order=desc&sort=reputation&site=stackoverflow&filter=!LnOMtAecZnTWD8_9-F83ja";
     private List<User> userList = new ArrayList<>();
-    private RecyclerView recyclerView;
+    private ListView listView;
     private UserAdapter userAdapter;
 
     private RequestQueue queue;
@@ -35,16 +37,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        listView = findViewById(R.id.list_view);
+
         parseJson();
 
         userAdapter = new UserAdapter(userList, getApplicationContext());
 
-        recyclerView = findViewById(R.id.recycler_view);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(userAdapter);
-
-
+        listView.setAdapter(userAdapter);
+        listView.setClickable(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                intent.putExtra("userData", userList.get(i));
+                startActivity(intent);
+            }
+        });
     }
 
     private void parseJson() {

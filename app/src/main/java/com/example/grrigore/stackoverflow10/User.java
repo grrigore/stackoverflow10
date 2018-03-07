@@ -1,10 +1,13 @@
 package com.example.grrigore.stackoverflow10;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by grrigore on 07.03.2018.
  */
 
-public class User {
+public class User implements Parcelable {
     private String userProfilePicture;
     private String userName;
     private String userLocation;
@@ -83,4 +86,41 @@ public class User {
                 ", userBronzeBadge=" + userBronzeBadge +
                 '}';
     }
+
+    private User(Parcel in) {
+        userProfilePicture = in.readString();
+        userName = in.readString();
+        userLocation = in.readString();
+        userGoldBadge = in.readInt();
+        userSilverBadge = in.readInt();
+        userBronzeBadge = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(userProfilePicture);
+        parcel.writeString(userName);
+        parcel.writeString(userLocation);
+        parcel.writeInt(userGoldBadge);
+        parcel.writeInt(userSilverBadge);
+        parcel.writeInt(userBronzeBadge);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }
