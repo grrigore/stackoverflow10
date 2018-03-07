@@ -21,6 +21,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     private List<User> userList;
     private Context context;
 
+    public UserAdapter(List<User> userList, Context context) {
+        this.userList = userList;
+        this.context = context;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
@@ -29,9 +34,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        User user = userList.get(position);
-        holder.userName.setText(user.getUserName());
-        Picasso.with(context).load(user.getUserProfilePicture()).into(holder.userProfileImage);
+        holder.userName.setText(userList.get(position).getUserName());
+        Picasso.with(context).load(userList.get(position).getUserProfilePicture()).into(holder.userProfileImage);
     }
 
     @Override
@@ -40,8 +44,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView userName;
-        public ImageView userProfileImage;
+        TextView userName;
+        ImageView userProfileImage;
 
         public MyViewHolder(View view) {
             super(view);
@@ -49,6 +53,4 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             userProfileImage = view.findViewById(R.id.profileImage_list_item);
         }
     }
-
-
 }
