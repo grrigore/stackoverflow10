@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        parseJson();
+
         userAdapter = new UserAdapter(userList, getApplicationContext());
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -42,8 +44,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(userAdapter);
 
-        queue = Volley.newRequestQueue(this);
 
+    }
+
+    private void parseJson() {
+        queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
