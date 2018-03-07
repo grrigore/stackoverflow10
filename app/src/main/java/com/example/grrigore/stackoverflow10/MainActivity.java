@@ -23,7 +23,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    //TODO internet connection check
+    //TODO 2 level caching (RAM & disk)
+    //TODO proces dying restore? smth like this
+    //TODO comentarii
+    //TODO everything in res/
+    //TODO no hardcode
+    //TODO UI polish
+    //TODO comments
+    //TODO files structure - packages
+    
     private static final String STATE_ITEMS = "items";
+
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String URL = "https://api.stackexchange.com/2.2/users?pagesize=10&order=desc&sort=reputation&site=stackoverflow&filter=!LnOMtAecZnTWD8_9-F83ja";
