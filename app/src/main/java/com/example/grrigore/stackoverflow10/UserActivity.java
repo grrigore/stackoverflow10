@@ -32,8 +32,6 @@ public class UserActivity extends AppCompatActivity {
 
         User user = getIntent().getParcelableExtra("userData");
 
-        Log.d("USER", user.toString());
-
         userNameTextView.setText(user.getUserName());
         Picasso.with(this).load(user.getUserProfilePicture()).resize(240,240).into(userProfilePictureImageView);
         userLocationTextView.setText(user.getUserLocation());

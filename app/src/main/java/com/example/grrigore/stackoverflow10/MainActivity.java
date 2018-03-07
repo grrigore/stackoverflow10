@@ -23,6 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String STATE_ITEMS = "items";
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String URL = "https://api.stackexchange.com/2.2/users?pagesize=10&order=desc&sort=reputation&site=stackoverflow&filter=!LnOMtAecZnTWD8_9-F83ja";
@@ -39,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.list_view);
 
-        parseJson();
+        if (savedInstanceState == null || !savedInstanceState.containsKey(STATE_ITEMS))
+            parseJson();
+        else
+            userList = savedInstanceState.getParcelableArrayList(STATE_ITEMS);
 
         userAdapter = new UserAdapter(userList, getApplicationContext());
 
@@ -94,5 +98,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         queue.add(jsonObjectRequest);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(STATE_ITEMS, new ArrayList<>(userList));
     }
 }
