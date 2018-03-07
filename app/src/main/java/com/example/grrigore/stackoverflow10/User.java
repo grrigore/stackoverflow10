@@ -12,6 +12,9 @@ public class User {
     private int userSilverBadge;
     private int userBronzeBadge;
 
+    public User() {
+    }
+
     public User(String userProfilePicture, String userName, String userLocation, int userGoldBadge, int userSilverBadge, int userBronzeBadge) {
         this.userProfilePicture = userProfilePicture;
         this.userName = userName;
@@ -67,5 +70,17 @@ public class User {
 
     public void setUserBronzeBadge(int userBronzeBadge) {
         this.userBronzeBadge = userBronzeBadge;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userProfilePicture='" + userProfilePicture + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userLocation='" + userLocation + '\'' +
+                ", userGoldBadge=" + userGoldBadge +
+                ", userSilverBadge=" + userSilverBadge +
+                ", userBronzeBadge=" + userBronzeBadge +
+                '}';
     }
 }
