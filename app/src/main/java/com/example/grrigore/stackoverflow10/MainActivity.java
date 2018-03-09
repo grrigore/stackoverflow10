@@ -1,14 +1,17 @@
 package com.example.grrigore.stackoverflow10;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -56,9 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
     private RequestQueue queue;
 
+
+    private TextView errorTextView;
+    private ImageView errorImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setMainActivity(savedInstanceState);
+    }
+
+    private void setMainActivity(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
 
         listView = findViewById(R.id.list_view);
@@ -120,12 +131,7 @@ public class MainActivity extends AppCompatActivity {
 //This indicates that the reuest is time out
                 } else if (error instanceof NoConnectionError) {
 //This indicates that  there is no connection
-                    TextView errorTextView = findViewById(R.id.error_text);
-                    ImageView errorImageView = findViewById(R.id.error_image);
-                    setContentView(R.layout.error_layout);
-
-                    errorTextView.setText("No internet connection!");
-                    Picasso.with(getApplicationContext()).load(R.drawable.icons8_wi_fi_off_100).resize(200,200).into(errorImageView);
+                    setErrorLayout(R.string.no_internet_text,R.drawable.nointernet);
                 } else if (error instanceof AuthFailureError) {
 // Error indicating that there was an Authentication Failure while performing the request
                 } else if (error instanceof ServerError) {
@@ -142,9 +148,32 @@ public class MainActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
+    private void setErrorLayout(int errorText, int errorImage) {
+        setContentView(R.layout.error_layout);
+
+        errorTextView = findViewById(R.id.error_text);
+        errorImageView = findViewById(R.id.error_image);
+
+
+        errorTextView.setText(errorText);
+        Picasso.with(getApplicationContext()).load(errorImage).into(errorImageView);
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(STATE_ITEMS, new ArrayList<>(userList));
+    }
+
+    public void reloadActivity(View view) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo data = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if ((wifi != null & data != null) && (wifi.isConnected() || data.isConnected())) {
+            setMainActivity(null);
+        } else {
+            Toast.makeText(getApplicationContext(), "No internet connection!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
