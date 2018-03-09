@@ -32,7 +32,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO internet connection check
     //TODO 2 level caching (RAM & disk)
     //TODO process dying restore? smth like this
     //TODO comments
