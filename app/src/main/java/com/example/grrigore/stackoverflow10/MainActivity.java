@@ -3,16 +3,26 @@ package com.example.grrigore.stackoverflow10;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,7 +115,26 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                //TODO implement each case
+                if (error instanceof TimeoutError) {
+//This indicates that the reuest is time out
+                } else if (error instanceof NoConnectionError) {
+//This indicates that  there is no connection
+                    TextView errorTextView = findViewById(R.id.error_text);
+                    ImageView errorImageView = findViewById(R.id.error_image);
+                    setContentView(R.layout.error_layout);
+
+                    errorTextView.setText("No internet connection!");
+                    Picasso.with(getApplicationContext()).load(R.drawable.icons8_wi_fi_off_100).resize(200,200).into(errorImageView);
+                } else if (error instanceof AuthFailureError) {
+// Error indicating that there was an Authentication Failure while performing the request
+                } else if (error instanceof ServerError) {
+//Indicates that the server responded with a error response
+                } else if (error instanceof NetworkError) {
+//Indicates that there was network error while performing the request
+                } else if (error instanceof ParseError) {
+// Indicates that the server response could not be parsed
+                }
             }
 
         });
