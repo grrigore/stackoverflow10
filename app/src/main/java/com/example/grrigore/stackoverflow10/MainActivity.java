@@ -13,15 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -49,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO run Lint
 
     private static final String STATE_ITEMS = "items";
+
+    private boolean serverError = false;
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -126,23 +124,15 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //TODO implement each case
-                if (error instanceof TimeoutError) {
-//This indicates that the reuest is time out
-                } else if (error instanceof NoConnectionError) {
+                if (error instanceof NoConnectionError) {
 //This indicates that  there is no connection
-                    setErrorLayout(R.string.no_internet_text,R.drawable.nointernet);
-                } else if (error instanceof AuthFailureError) {
-// Error indicating that there was an Authentication Failure while performing the request
+                    setErrorLayout(R.string.no_internet_text, R.drawable.nointernet);
                 } else if (error instanceof ServerError) {
 //Indicates that the server responded with a error response
-                } else if (error instanceof NetworkError) {
-//Indicates that there was network error while performing the request
-                } else if (error instanceof ParseError) {
-// Indicates that the server response could not be parsed
+                    setErrorLayout(R.string.server_text, R.drawable.server_error);
+                    serverError = true;
                 }
             }
-
         });
 
         queue.add(jsonObjectRequest);
@@ -173,7 +163,11 @@ public class MainActivity extends AppCompatActivity {
         if ((wifi != null & data != null) && (wifi.isConnected() || data.isConnected())) {
             setMainActivity(null);
         } else {
-            Toast.makeText(getApplicationContext(), "No internet connection!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Connect to internet!", Toast.LENGTH_SHORT).show();
+        }
+
+        if(serverError){
+            Toast.makeText(getApplicationContext(),"Try again later!",Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">stackoverflow10</string>
     <string name="no_internet_text">No internet connection!</string>
+    <string name="timeout_text">Request time out!</string>
+    <string name="authfailed_text">Authentication Failure while performing the request!</string>
+    <string name="server_text">Server error!</string>
+    <string name="network_text">Network error while performing the request!</string>
+    <string name="parse_text">Server response could not be parsed!</string>
 </resources>
