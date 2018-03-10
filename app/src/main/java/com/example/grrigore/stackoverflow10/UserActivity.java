@@ -2,13 +2,15 @@ package com.example.grrigore.stackoverflow10;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 public class UserActivity extends AppCompatActivity {
+
+
+    private static final String INTENT_KEY = "userData";
 
     private TextView userNameTextView;
     private ImageView userProfilePictureImageView;
@@ -30,10 +32,10 @@ public class UserActivity extends AppCompatActivity {
         userSilverBadgeTextView = findViewById(R.id.silver_badges);
         userGoldBadgeTextView = findViewById(R.id.gold_badges);
 
-        User user = getIntent().getParcelableExtra("userData");
+        User user = getIntent().getParcelableExtra(INTENT_KEY);
 
         userNameTextView.setText(user.getUserName());
-        Picasso.with(this).load(user.getUserProfilePicture()).resize(240,240).into(userProfilePictureImageView);
+        Picasso.with(this).load(user.getUserProfilePicture()).resize(240, 240).into(userProfilePictureImageView);
         userLocationTextView.setText(user.getUserLocation());
         userBronzeBadgeTextView.setText(String.valueOf(user.getUserBronzeBadge()));
         userSilverBadgeTextView.setText(String.valueOf(user.getUserSilverBadge()));

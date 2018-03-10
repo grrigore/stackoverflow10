@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="text_size_user_activity">16sp</dimen>
+    <dimen name="list_item_margins">8dp</dimen>
+    <dimen name="text_size_list_item">20sp</dimen>
+    <dimen name="text_size_error">20sp</dimen>
+    <dimen name="image_size">32dp</dimen>
+    <dimen name="user_activity_margins">24dp</dimen>
+    <dimen name="view_margin_size">8dp</dimen>
+    <dimen name="right_margin_size">8dp</dimen>
+</resources>

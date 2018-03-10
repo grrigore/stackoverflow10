@@ -32,12 +32,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO 2 level caching (RAM & disk)
-    //TODO process dying restore? smth like this
     //TODO comments
-    //TODO everything in res/
-    //TODO no hardcode
-    //TODO UI polish
     //TODO comments
     //TODO files structure - packages
     //TODO run findBugs
@@ -45,11 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String STATE_ITEMS = "items";
 
+    private static final String jsonArrayTag = "items";
+    private static final String jsonUsernameTag = "display_name";
+    private static final String jsonImageTag = "profile_image";
+    private static final String jsonLocationTag = "location";
+    private static final String jsonBadgesTag = "badge_counts";
+    private static final String jsonGoldTag = "gold";
+    private static final String jsonSilverTag = "silver";
+    private static final String jsonBronzeTag = "bronze";
+
     private boolean serverError = false;
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-
+    private static final String INTENT_KEY = "userData";
     public static final String URL = "https://api.stackexchange.com/2.2/users?pagesize=10&order=desc&sort=reputation&site=stackoverflow&filter=!LnOMtAecZnTWD8_9-F83ja";
+
     private List<User> userList = new ArrayList<>();
     private ListView listView;
     private UserAdapter userAdapter;
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                intent.putExtra("userData", userList.get(i));
+                intent.putExtra(INTENT_KEY, userList.get(i));
                 startActivity(intent);
             }
         });
@@ -96,21 +100,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONArray jsonArray = response.getJSONArray("items");
+
+                    JSONArray jsonArray = response.getJSONArray(jsonArrayTag);
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject userObject = jsonArray.getJSONObject(i);
 
                         User user = new User();
-                        user.setUserName(userObject.getString("display_name"));
-                        user.setUserProfilePicture(userObject.getString("profile_image"));
-                        user.setUserLocation(userObject.getString("location"));
+                        user.setUserName(userObject.getString(jsonUsernameTag));
+                        user.setUserProfilePicture(userObject.getString(jsonImageTag));
+                        user.setUserLocation(userObject.getString(jsonLocationTag));
 
-                        JSONObject userBadges = userObject.getJSONObject("badge_counts");
+                        JSONObject userBadges = userObject.getJSONObject(jsonBadgesTag);
 
-                        user.setUserGoldBadge(userBadges.getInt("gold"));
-                        user.setUserSilverBadge(userBadges.getInt("silver"));
-                        user.setUserBronzeBadge(userBadges.getInt("bronze"));
+                        user.setUserGoldBadge(userBadges.getInt(jsonGoldTag));
+                        user.setUserSilverBadge(userBadges.getInt(jsonSilverTag));
+                        user.setUserBronzeBadge(userBadges.getInt(jsonBronzeTag));
 
                         userList.add(user);
                     }
@@ -124,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NoConnectionError) {
-//This indicates that  there is no connection
+                    //This indicates that  there is no connection
                     setErrorLayout(R.string.no_internet_text, R.drawable.nointernet);
                 } else if (error instanceof ServerError) {
-//Indicates that the server responded with a error response
+                    //Indicates that the server responded with a error response
                     setErrorLayout(R.string.server_text, R.drawable.server_error);
                     serverError = true;
                 }
@@ -162,11 +167,11 @@ public class MainActivity extends AppCompatActivity {
         if ((wifi != null & data != null) && (wifi.isConnected() || data.isConnected())) {
             setMainActivity(null);
         } else {
-            Toast.makeText(getApplicationContext(), "Connect to internet!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.try_again_internet, Toast.LENGTH_SHORT).show();
         }
 
-        if(serverError){
-            Toast.makeText(getApplicationContext(),"Try again later!",Toast.LENGTH_SHORT).show();
+        if (serverError) {
+            Toast.makeText(getApplicationContext(), R.string.try_again, Toast.LENGTH_SHORT).show();
         }
     }
 }

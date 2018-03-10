@@ -13,17 +13,19 @@
         android:src="@drawable/nointernet" />
 
     <TextView
-        android:textAlignment="center"
         android:id="@+id/error_text"
-        android:text="error text goes here"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:fontFamily="serif"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_error" />
 
     <Button
         android:id="@+id/retry_button"
-        android:onClick="reloadActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Retry" />
+        android:fontFamily="serif"
+        android:onClick="reloadActivity"
+        android:text="@string/button_text" />
 </LinearLayout>

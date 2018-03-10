@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">stackoverflow10</string>
+    <string name="app_name">top 10 stackoverflow</string>
     <string name="no_internet_text">No internet connection!</string>
     <string name="server_text">Server error!</string>
+    <string name="try_again_internet">Please connect to internet!</string>
+    <string name="try_again">Try again later!</string>
+    <string name="button_text">Retry</string>
 </resources>

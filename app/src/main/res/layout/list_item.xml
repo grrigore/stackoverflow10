@@ -2,24 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:weightSum="2">
 
     <ImageView
-        android:layout_marginTop="8dp"
         android:id="@+id/profileImage_list_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        android:layout_marginBottom="@dimen/list_item_margins"
+        android:layout_marginLeft="@dimen/list_item_margins"
+        android:layout_marginTop="@dimen/list_item_margins" />
 
     <TextView
         android:id="@+id/name_list_item"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="username"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_weight="1.5"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text=""
+        android:textSize="@dimen/text_size_list_item" />
 
 </LinearLayout>

@@ -69,7 +69,7 @@ public class UserAdapter extends BaseAdapter {
         return view;
     }
 
-    class ViewHolder {
+    static class ViewHolder {
         TextView userName;
         ImageView userProfileImage;
     }
