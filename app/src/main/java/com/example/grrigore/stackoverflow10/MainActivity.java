@@ -33,21 +33,18 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //TODO comments
-    //TODO comments
     //TODO files structure - packages
-    //TODO run findBugs
-    //TODO run Lint
 
     private static final String STATE_ITEMS = "items";
 
-    private static final String jsonArrayTag = "items";
-    private static final String jsonUsernameTag = "display_name";
-    private static final String jsonImageTag = "profile_image";
-    private static final String jsonLocationTag = "location";
-    private static final String jsonBadgesTag = "badge_counts";
-    private static final String jsonGoldTag = "gold";
-    private static final String jsonSilverTag = "silver";
-    private static final String jsonBronzeTag = "bronze";
+    private static final String JSON_ARRAY_TAG = "items";
+    private static final String JSON_USERNAME_TAG = "display_name";
+    private static final String JSON_IMAGE_TAG = "profile_image";
+    private static final String JSON_LOCATION_TAG = "location";
+    private static final String JSON_BADGES_TAG = "badge_counts";
+    private static final String JSON_GOLD_TAG = "gold";
+    private static final String JSON_SILVER_TAG = "silver";
+    private static final String JSON_BRONZE_TAG = "bronze";
 
     private boolean serverError = false;
 
@@ -101,21 +98,21 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
 
-                    JSONArray jsonArray = response.getJSONArray(jsonArrayTag);
+                    JSONArray jsonArray = response.getJSONArray(JSON_ARRAY_TAG);
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject userObject = jsonArray.getJSONObject(i);
 
                         User user = new User();
-                        user.setUserName(userObject.getString(jsonUsernameTag));
-                        user.setUserProfilePicture(userObject.getString(jsonImageTag));
-                        user.setUserLocation(userObject.getString(jsonLocationTag));
+                        user.setUserName(userObject.getString(JSON_USERNAME_TAG));
+                        user.setUserProfilePicture(userObject.getString(JSON_IMAGE_TAG));
+                        user.setUserLocation(userObject.getString(JSON_LOCATION_TAG));
 
-                        JSONObject userBadges = userObject.getJSONObject(jsonBadgesTag);
+                        JSONObject userBadges = userObject.getJSONObject(JSON_BADGES_TAG);
 
-                        user.setUserGoldBadge(userBadges.getInt(jsonGoldTag));
-                        user.setUserSilverBadge(userBadges.getInt(jsonSilverTag));
-                        user.setUserBronzeBadge(userBadges.getInt(jsonBronzeTag));
+                        user.setUserGoldBadge(userBadges.getInt(JSON_GOLD_TAG));
+                        user.setUserSilverBadge(userBadges.getInt(JSON_SILVER_TAG));
+                        user.setUserBronzeBadge(userBadges.getInt(JSON_BRONZE_TAG));
 
                         userList.add(user);
                     }
