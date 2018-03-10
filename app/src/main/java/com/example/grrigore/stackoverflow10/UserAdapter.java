@@ -46,7 +46,7 @@ public class UserAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        View view = null;
+        View view;
         final int currentPosition = position;
         ViewHolder viewHolder;
 

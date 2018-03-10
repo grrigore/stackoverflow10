@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean serverError = false;
 
     private static final String INTENT_KEY = "userData";
-    public static final String URL = "https://api.stackexchange.com/2.2/users?pagesize=10&order=desc&sort=reputation&site=stackoverflow&filter=!LnOMtAecZnTWD8_9-F83ja";
+    private static final String URL = "https://api.stackexchange.com/2.2/users?pagesize=10&order=desc&sort=reputation&site=stackoverflow&filter=!LnOMtAecZnTWD8_9-F83ja";
 
     private List<User> userList = new ArrayList<>();
     private ListView listView;
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putParcelableArrayList(STATE_ITEMS, new ArrayList<>(userList));
     }
 
-    public void reloadActivity(View view) {
+    public void reloadActivity() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo data = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
