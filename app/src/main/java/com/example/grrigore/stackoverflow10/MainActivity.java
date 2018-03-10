@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putParcelableArrayList(STATE_ITEMS, new ArrayList<>(userList));
     }
 
-    public void reloadActivity() {
+    public void reloadActivity(View view) {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo data = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
