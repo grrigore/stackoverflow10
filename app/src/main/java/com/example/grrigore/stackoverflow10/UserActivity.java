@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.grrigore.stackoverflow10.model.User;
 import com.squareup.picasso.Picasso;
 
 public class UserActivity extends AppCompatActivity {

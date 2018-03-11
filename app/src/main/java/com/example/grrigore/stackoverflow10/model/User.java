@@ -1,4 +1,4 @@
-package com.example.grrigore.stackoverflow10;
+package com.example.grrigore.stackoverflow10.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
