@@ -12,6 +12,11 @@ It involves using the [stackoverflow API](https://api.stackexchange.com/docs) an
 On the list's item click a new activity will be launched and detalis about the user will be displayed.
 
 
+## libraries used
+
+* [Picasso](http://square.github.io/picasso/)
+* [Volley](https://github.com/google/volley)
+
 ## external resources
 
 Icons from [icons8](https://icons8.com).
