@@ -15,6 +15,10 @@ public class User implements Parcelable {
     private int userSilverBadge;
     private int userBronzeBadge;
 
+
+    /**
+     * empty constructor
+     */
     public User() {
     }
 

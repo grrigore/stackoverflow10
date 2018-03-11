@@ -34,9 +34,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO comments
-    //TODO files structure - packages
-
     private static final String STATE_ITEMS = "items";
 
     private static final String JSON_ARRAY_TAG = "items";
@@ -69,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
         setMainActivity(savedInstanceState);
     }
 
+    /**
+     * @param savedInstanceState
+     * this method is used to set the main activity layout
+     * and content
+     */
     private void setMainActivity(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
 
@@ -93,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * this method takes no parameter and
+     * it's used to parse the json and also
+     * handling some of the errors that might occur
+     */
     private void parseJson() {
         queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
@@ -128,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NoConnectionError) {
-                    //This indicates that  there is no connection
+                    //This indicates that there is no connection
                     setErrorLayout(R.string.no_internet_text, R.drawable.nointernet);
                 } else if (error instanceof ServerError) {
                     //Indicates that the server responded with a error response
@@ -141,6 +148,12 @@ public class MainActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
+    /**
+     * @param errorText
+     * @param errorImage
+     * this  method is used to set the main activity
+     * layout in case an error occurs
+     */
     private void setErrorLayout(int errorText, int errorImage) {
         setContentView(R.layout.error_layout);
 
@@ -158,6 +171,12 @@ public class MainActivity extends AppCompatActivity {
         outState.putParcelableArrayList(STATE_ITEMS, new ArrayList<>(userList));
     }
 
+    /**
+     * @param view
+     * onClick method used to set the layout
+     * if there is a network connection after the app was
+     * launched
+     */
     public void reloadActivity(View view) {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
