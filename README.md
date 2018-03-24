@@ -4,8 +4,7 @@
 
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 
-This application was made for an interview at [ab4.system
-](http://www.ab4.systems).
+This application was made for an internship interview.
 
 It involves using the [stackoverflow API](https://api.stackexchange.com/docs) and displaying the first 10 users in a listView.
 
