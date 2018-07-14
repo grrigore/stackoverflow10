@@ -2,6 +2,7 @@
 
 # stackoverflow10
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/21146d5b8ea54cf3b9aef3cc379652d7)](https://app.codacy.com/app/grrigore/stackoverflow10?utm_source=github.com&utm_medium=referral&utm_content=grrigore/stackoverflow10&utm_campaign=badger)
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 
 This application was made for an internship interview.
